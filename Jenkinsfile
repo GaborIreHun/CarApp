@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage("Cloning CarApp repository") {
             steps{
-                 git url: 'https://github.com/GaborIreHun/CarApp.git'
+                 git 'https://github.com/GaborIreHun/CarApp.git'
             }                  
         }
 
