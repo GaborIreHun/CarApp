@@ -1,6 +1,8 @@
 pipeline {
 
-    agent any
+    agent {
+        docker{image 'maven:3.5-alpine'}
+    }
 
     stages {
         stage("Cloning CarApp repository") {
@@ -11,7 +13,7 @@ pipeline {
 
         stage("Code Stability") {
             steps{
-                sh "mvn clean install"
+                sh "mvn clean package"
             }      
         }
 
