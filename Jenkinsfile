@@ -14,7 +14,12 @@ pipeline {
             }                  
         }
 
-        stage("Code Stability") {
+        stage("Mvn version check") {
+            steps{
+                sh "mvn --version"
+            }      
+        }
+         stage("Code Stability") {
             steps{
                 sh "mvn --version"
                 sh "mvn clean package"
