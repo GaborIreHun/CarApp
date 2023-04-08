@@ -1,8 +1,11 @@
 pipeline {
 
-    agent {
+    agent any
+    /*
+    {
         docker{image 'maven:3.5-alpine'}
     }
+    */
 
     stages {
         stage("Cloning CarApp repository") {
