@@ -1,6 +1,10 @@
 pipeline {
 
     agent any
+    
+    options {
+        gitTool 'Default'
+    }
 
     stages {
         stage("Cloning CarApp repository") {
