@@ -13,6 +13,11 @@ pipeline {
                  git 'https://github.com/GaborIreHun/CarApp.git'
             }                  
         }
+         stage("Java version check") {
+            steps{
+                sh "java --version"
+            }      
+        }
 
         stage("Mvn version check") {
             steps{
