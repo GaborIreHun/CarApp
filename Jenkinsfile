@@ -3,8 +3,9 @@ pipeline {
     agent any
 
     stages {
-
-        stage("Cloning CarApp repository") {
+        steps{
+            stage("Cloning CarApp repository") {
+            
             git url: 'https://github.com/GaborIreHun/CarApp/tree/master'
         }
 
@@ -30,5 +31,8 @@ pipeline {
         stage("Sonarqube Analysis") {
             sh "mvn sonar:sonar -Dsonar.host.url=${SONAR_URL} -Dsonar.login=${SONAR_USER} -Dsonar.password=${SONAR_PASSWORD} -Dsonar.java.binaries=."
         }
+        }
+
+        
     }
 }
