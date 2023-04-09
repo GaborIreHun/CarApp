@@ -8,14 +8,14 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: carApp
+      app: carapp
   template:
     metadata:
       labels:
-        app: carApp
+        app: carapp
     spec:
       containers:
-      - name: carApp
-        image: carApp:latest
+      - name: carapp
+        image: carapp:latest
         ports:
         - containerPort: 8585
