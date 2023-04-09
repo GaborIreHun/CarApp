@@ -11,10 +11,12 @@ pipeline {
         stage("Cloning CarApp repository") {
             steps{
                  git 'https://github.com/GaborIreHun/CarApp.git'
+                 echo "************** repo cloned *****************"
             }                  
         }
          stage("Java version check") {
             steps{
+                sh "echo %JAVA_HOME%"
                 sh "java --version"
             }      
         }
