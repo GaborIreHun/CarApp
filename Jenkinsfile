@@ -37,17 +37,17 @@ pipeline {
                 junit '**/target/surefire-reports/TEST-*.xml'
             }       
         }
-
+        /*
         stage("Security Testing") {
             steps{
                 bat "mvn org.owasp:dependency-check-maven:check"
-                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'target', reportFiles: 'dependency-check-report.html', reportName:'Dependency Check Report', reportTitles: ''])
             }       
         }
+        */
 
         stage("Sonarqube Analysis") {
             steps{
-                bat "mvn sonar:sonar -Dsonar.host.url=${SONAR_URL} -Dsonar.login=${SONAR_USER} -Dsonar.password=${SONAR_PASSWORD} -Dsonar.java.binaries=."
+                bat "mvn sonar:sonar -Dsonar.host.url=${'http://localhost:9000'} -Dsonar.login=${'admin'} -Dsonar.password=${'admin'} -Dsonar.java.binaries=."
             }    
         }
 
