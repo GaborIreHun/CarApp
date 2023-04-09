@@ -19,59 +19,58 @@ pipeline {
          stage("Java version check") {
             steps{
                //sh "echo %JAVA_HOME%"
-                sh "java --version"
+                bat "java --version"
             }      
         }
 
         stage("Mvn version check") {
             steps{
-                sh "mvn --version"
+                bat "mvn --version"
             }      
         }
          stage("Code Stability") {
             steps{
-                sh "mvn --version"
-                sh "mvn clean package"
+                bat "mvn clean package"
             }      
         }
 
         stage("Code Quality") {
             steps{
-                sh "mvn checkstyle:checkstyle"
+                bat "mvn checkstyle:checkstyle"
                 recordIssues(tools: [checkStyle(pattern: '**/checkstyleresult.xml')])
             }          
         }
        
         stage("Unit Testing") {
             steps{
-                sh "mvn test"
+                bat "mvn test"
                 recordIssues(tools: [junitParser(pattern: 'target/surefirereports/*.xml')])
             }       
         }
 
         stage("Security Testing") {
             steps{
-                sh "mvn org.owasp:dependency-check-maven:check"
+                bat "mvn org.owasp:dependency-check-maven:check"
                 publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'target', reportFiles: 'dependency-check-report.html', reportName:'Dependency Check Report', reportTitles: ''])
             }       
         }
 
         stage("Sonarqube Analysis") {
             steps{
-                sh "mvn sonar:sonar -Dsonar.host.url=${SONAR_URL} -Dsonar.login=${SONAR_USER} -Dsonar.password=${SONAR_PASSWORD} -Dsonar.java.binaries=."
+                bat "mvn sonar:sonar -Dsonar.host.url=${SONAR_URL} -Dsonar.login=${SONAR_USER} -Dsonar.password=${SONAR_PASSWORD} -Dsonar.java.binaries=."
             }    
         }
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t carApp .'
+                bat 'docker build -t carApp .'
             }
         }
 
         stage('Deploy with Kubernetes') {
             steps {
                 withKubeConfig([credentialsId: 'kubeconfig']) {
-                    sh 'kubectl apply -f deployment.yml'
+                    bat 'kubectl apply -f deployment.yml'
                 }
             }
         }
