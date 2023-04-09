@@ -1,9 +1,7 @@
 pipeline {
 
     agent any
-    environment {
-        GIT_TOKEN = credentials('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')
-    }
+  
     /*
     {
         docker{image 'maven:3.5-alpine'}
@@ -13,7 +11,7 @@ pipeline {
     stages {
         stage("Cloning CarApp repository") {
             steps{
-                git credentialsId: env.GIT_TOKEN, branch: 'master', url: 'https://github.com/GaborIreHun/CarApp.git'
+                git branch: 'master', url: 'https://github.com/GaborIreHun/CarApp.git'
 
                 echo "************** repo cloned *****************"
             }                  
