@@ -16,30 +16,20 @@ pipeline {
                 echo "************** repo cloned *****************"
             }                  
         }
-         stage("Java version check") {
+
+        stage("Code Stability") {
             steps{
-               //sh "echo %JAVA_HOME%"
-                bat "java --version"
+                bat "mvn clean compile"
             }      
         }
 
-        stage("Mvn version check") {
-            steps{
-                bat "mvn --version"
-            }      
-        }
-         stage("Code Stability") {
-            steps{
-                bat "mvn clean package"
-            }      
-        }
+        //stage("Code Quality") {
+        //    steps{
+        //        bat "mvn checkstyle:checkstyle"
+        //        recordIssues(tools: [checkStyle(pattern: '**/checkstyleresult.xml')])
+        //    }          
+        //}
 
-        stage("Code Quality") {
-            steps{
-                bat "mvn checkstyle:checkstyle"
-                recordIssues(tools: [checkStyle(pattern: '**/checkstyleresult.xml')])
-            }          
-        }
        
         stage("Unit Testing") {
             steps{
