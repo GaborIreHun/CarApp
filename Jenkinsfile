@@ -51,6 +51,12 @@ pipeline {
             }    
         }
 
+        stage("Package") {
+            steps{
+                bat "mvn package"
+            }      
+        }
+
         stage('Build Docker Image') {
             steps {
                 bat 'docker build -t car-app .'
