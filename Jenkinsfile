@@ -53,7 +53,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t carApp .'
+                bat 'docker build -t car-app .'
             }
         }
 
