@@ -34,7 +34,7 @@ pipeline {
         stage("Unit Testing") {
             steps{
                 bat "mvn test"
-                recordIssues(tools: [junitParser(pattern: 'target/surefirereports/*.xml')])
+                junit '**/target/surefire-reports/TEST-*.xml'
             }       
         }
 
