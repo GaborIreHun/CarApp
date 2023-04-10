@@ -59,15 +59,23 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t car-app .'
+                //bat 'docker build -t car-app .'
+                script {
+                    docker.build("car-app:${latest}")
+                }
             }
         }
 
         stage('Push Docker Image') {
             steps {
-                bat 'docker login --username=gaboreire'
-                bat 'docker tag car-app gaboreire/car-app:latest'
-                bat 'docker push gaboreire/car-app:latest'
+                //bat 'docker login --username=gaboreire'
+                //bat 'docker tag car-app gaboreire/car-app:latest'
+                //bat 'docker push gaboreire/car-app:latest'
+                script {
+                    docker.withRegistry('https://hub.docker.com', 'gaboreire') {
+                    docker.push("car-app:${latest}")
+                    }
+                }
             }
         }
 
