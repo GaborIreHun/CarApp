@@ -63,6 +63,14 @@ pipeline {
             }
         }
 
+        stage('Push Docker Image') {
+            steps {
+                bat 'docker login --username=gaboreire'
+                bat 'docker tag car-app gaboreire/car-app:latest'
+                bat 'docker push gaboreire/car-app:latest'
+            }
+        }
+
         stage('Deploy with Kubernetes') {
             steps {
                script {
