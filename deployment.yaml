@@ -1,21 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: carAppService
-  labels:
-    app: carAppService
+  name: spring-boot-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: car-app
+      app: spring-boot-app
   template:
     metadata:
       labels:
-        app: car-app
+        app: spring-boot-app
     spec:
       containers:
-      - name: car-app
+      - name: spring-boot-container
         image: car-app:latest
+        imagePullPolicy: Never
         ports:
-        - containerPort: 8081
+        - containerPort: 8080
