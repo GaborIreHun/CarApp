@@ -84,7 +84,7 @@ pipeline {
 
         stage('Deploy with Kubernetes') {
             steps {
-
+                bat 'kubectl config use-context docker-desktop'
                 bat 'kubectl apply -f deployment.yaml --context docker-desktop'
 
             }
