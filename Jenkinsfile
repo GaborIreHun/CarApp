@@ -1,10 +1,11 @@
 pipeline {
 
     agent any
-
+    /*
     environment {
         DOCKERHUB_CREDENTIALS = credentialsId('docker-credentials')
     }
+    */
 
     stages {
         stage("Cloning CarApp repository") {
@@ -63,14 +64,14 @@ pipeline {
 
         stage('Push Docker Image') {
             steps {
-                //withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
-                    bat 'docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW'
+                withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+                    bat 'docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD'
                     //bat 'docker login -u $DOCKERHUB_USERNAME --password-stdin'
                     //bat 'docker login --username=gaboreire'
                     //bat 'docker tag car-app gaboreire/car-app:latest'
                     //bat 'docker push gaboreire/car-app:latest'
                     bat "docker push gaboreire/car-app:latest"
-               // }
+                }
             }
         }
 
