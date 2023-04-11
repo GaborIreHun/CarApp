@@ -65,7 +65,7 @@ pipeline {
 
         stage('Push Docker Image') {
             steps {
-                bat 'docker login -u env.DOCKERHUB_USERNAME -p env.DOCKERHUB_PASSWORD'
+                bat 'docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}'
                 //bat 'docker login --username=gaboreire'
                 //bat 'docker tag car-app gaboreire/car-app:latest'
                 //bat 'docker push gaboreire/car-app:latest'
