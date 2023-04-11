@@ -62,7 +62,7 @@ pipeline {
                 bat 'docker build -t car-app .'
             }
         }
-
+        /*
         stage('Deploy') {
             steps {
 
@@ -79,6 +79,7 @@ pipeline {
                // }
             }
         }
+        */
        
 
         stage('Deploy with Kubernetes') {
