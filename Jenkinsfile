@@ -66,7 +66,7 @@ pipeline {
         stage('Deploy') {
             steps {
 
-                bat 'docker run -p 8585:8081 car-app'
+                //bat 'docker run -p 8585:8081 car-app'
                // withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
                     //bat 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                     //bat 'docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD'
@@ -79,15 +79,15 @@ pipeline {
                // }
             }
         }
-        /*
+       
 
         stage('Deploy with Kubernetes') {
             steps {
-               script {
-                    bat 'kubectl apply -f deployment.yml'
-               }
+
+                bat 'kubectl apply -f deployment.yaml'
+
             }
         }
-        */
+      
     }
 }
