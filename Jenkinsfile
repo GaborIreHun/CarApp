@@ -1,12 +1,20 @@
 pipeline {
 
+    environment {
+        dockerimagename = "gaboreire/car-app"
+        dockerImage = ""
+    }
+
     agent any
+    /*
     options {
         buildDiscarder(logRotator(numToKeepStr: '5'))
     }
+    
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub')
     }
+    */
 
     stages {
         stage("Cloning CarApp repository") {
@@ -59,7 +67,22 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t car-app .'
+                dockerImage = docker.build dockerimagename
+                //bat 'docker build -t car-app .'
+            }
+        }
+
+        stage('Push docker image') {
+            environment {
+                registryCredential = 'docker-credentials'
+            }
+
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', registryCredential ) {
+                        dockerImage.push("latest")
+                    }
+                }
             }
         }
         /*
@@ -84,8 +107,11 @@ pipeline {
 
         stage('Deploy with Kubernetes') {
             steps {
+                script {
+                    kubernetesDeploy(config: "deployment.yaml", kubeconfigId: "kubernetes")
+                }
                 //bat 'kubectl config use-context docker-desktop'
-                bat 'kubectl apply -f deployment.yaml --context "minikube"'
+                //bat 'kubectl apply -f deployment.yaml --context "minikube"'
 
             }
         }
