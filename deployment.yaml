@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gaboreire/car-app
+  name: carapp-deployment
 spec:
   selector:
     matchLabels:
-      app: gaboreire/car-app
+      app: CarApp-Manager
   replicas: 1
   template:
     metadata:
       labels:
-        app: gaboreire/car-app
+        app: CarApp-Manager
     spec:
       containers:
-        - name: gaboreire/car-app
-          image: gaboreire/car-app:latest
+        - name: carserver
+          image: car-app:latest
           ports:
             - containerPort: 8081
           env:
@@ -24,10 +24,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: gaboreire/car-app
+  name: carapp-service
 spec:
   selector:
-    app: gaboreire/car-app
+    app: CarApp-Manager
   ports:
     - name: http
       port: 8082

@@ -110,7 +110,7 @@ pipeline {
         stage('Deploy with Kubernetes') {
             steps {
                 script {
-                    kubernetesDeploy(configs: "cardeployment.yaml", kubeconfigId: "kubernetes")
+                    kubernetesDeploy(configs: "deployment.yaml", kubeconfigId: "kubernetes")
                 }
                 //bat 'kubectl config use-context docker-desktop'
                 //bat 'kubectl apply -f deployment.yaml --context "minikube"'
