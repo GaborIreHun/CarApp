@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: carservice-app
+  name: gaboreire/car-app
 spec:
   selector:
     matchLabels:
-      app: carservice-app
+      app: gaboreire/car-app
   replicas: 1
   template:
     metadata:
       labels:
-        app: carservice-app
+        app: gaboreire/car-app
     spec:
       containers:
-        - name: carservice-app
+        - name: gaboreire/car-app
           image: gaboreire/car-app:latest
           ports:
             - containerPort: 8081
@@ -24,10 +24,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: carservice-app
+  name: gaboreire/car-app
 spec:
   selector:
-    app: carservice-app
+    app: gaboreire/car-app
   ports:
     - name: http
       port: 8082
