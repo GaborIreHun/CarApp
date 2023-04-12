@@ -67,8 +67,10 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
+                script {
                 dockerImage = docker.build dockerimagename
                 //bat 'docker build -t car-app .'
+                }
             }
         }
 
