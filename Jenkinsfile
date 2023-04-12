@@ -1,7 +1,7 @@
 pipeline {
 
     environment {
-        dockerimagename = "car-app"
+        dockerimagename = "gaboreire/car-app"
         dockerImage = ""
     }
 
