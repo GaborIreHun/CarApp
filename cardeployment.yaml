@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: carapp-deployment
+  labels:
+    app: gaboreire/car-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gaboreire/car-app
+  template:
+    metadata:
+      labels:
+        app: gaboreire/car-app 
+    spec:
+      containers:
+      - name: carserver
+        image: gaboreire/car-app:latest
+        ports:
+        - containerPort: 8081
+        
+        
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: carapp-service
+spec:
+  selector:
+    app: gaboreire/car-app 
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 5000
+    targetPort: 8081
+    nodePort: 31110
