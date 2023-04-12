@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: carservice-app
-          image: car-app:latest
+          image: gaboreire/car-app:latest
           ports:
             - containerPort: 8081
           env:
