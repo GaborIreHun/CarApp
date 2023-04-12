@@ -3,16 +3,16 @@ kind: Deployment
 metadata:
   name: carapp-deployment
   labels:
-    app: carapp
+    app: CarApp-Manager
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: carapp
+      app: CarApp-Manager
   template:
     metadata:
       labels:
-        app: carapp 
+        app: CarApp-Manager 
     spec:
       containers:
       - name: carserver
@@ -29,7 +29,7 @@ metadata:
   name: carapp-service
 spec:
   selector:
-    app: carapp 
+    app: CarApp-Manager 
   type: LoadBalancer
   ports:
   - protocol: TCP
