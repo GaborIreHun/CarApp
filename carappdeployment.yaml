@@ -2,13 +2,11 @@ apiVersion: apps/v1
 kind: Deployment # Kubernetes resource kind we are creating
 metadata:
   name: carapp-deployment
-  labels:
-    app: CarApp-Manager
 spec:
-  replicas: 1 # Number of replicas that will be created for this deployment
   selector:
     matchLabels:
       app: CarApp-Manager
+  replicas: 1 # Number of replicas that will be created for this deployment
   template:
     metadata:
       labels:
@@ -17,7 +15,6 @@ spec:
       containers:
       - name: car-app
         image: car-app:latest # Image that will be used to containers in the cluster
-        imagePullPolicy: IfNotPresent
         ports:
           - containerPort: 8081 # The port that the container is running on in the cluster
 ---
@@ -28,9 +25,8 @@ metadata:
 spec:
   selector:
     app: CarApp-Manager 
-  # type: LoadBalancer
   ports:
-  - protocol: TCP
+  - name: http
     port: 8081
     targetPort: 8081
   type: NodePort
