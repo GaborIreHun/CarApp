@@ -30,9 +30,10 @@ metadata:
 spec:
   selector:
     app: CarApp-Manager 
-  type: LoadBalancer
+  # type: LoadBalancer
   ports:
   - protocol: TCP
     port: 8081
     targetPort: 8081
-    nodePort: 31110
+  type: NodePort
+    # nodePort: 31110
